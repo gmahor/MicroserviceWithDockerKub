@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/gatewayserver/gatewayserver.iml" filepath="$PROJECT_DIR$/gatewayserver/gatewayserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mdm-service/mdm-service.iml" filepath="$PROJECT_DIR$/mdm-service/mdm-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-auth/user-auth.iml" filepath="$PROJECT_DIR$/user-auth/user-auth.iml" />
+    </modules>
+  </component>
+</project>

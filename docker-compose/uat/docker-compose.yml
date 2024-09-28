@@ -1,0 +1,27 @@
+services:
+  mdm_service:
+    image: "gourav60/mdm-service:v1"
+    container_name: "mdm-service-ms"
+    ports:
+      - "9101:9101"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - eroom
+  user_auth:
+    image: "gourav60/user-auth:v1"
+    container_name: "user_auth-ms"
+    ports:
+      - "9102:9102"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - eroom
+
+networks:
+  eroom:
+    driver: "bridge"

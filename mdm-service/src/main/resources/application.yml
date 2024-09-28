@@ -1,0 +1,17 @@
+server:
+  port: 9101
+
+spring:
+  application:
+    name: mdm_service
+  profiles:
+    active: dev
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/

@@ -1,0 +1,80 @@
+services:
+  eurekaserver:
+    image: "eurekaserver"
+    container_name: "eurekaserver-ms"
+    ports:
+      - "8761:8761"
+    healthcheck:
+      test: "curl --fail --silent http://eurekaserver-ms:8761/actuator/health/readiness || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - eroom
+    environment:
+      SPRING_APPLICATION_NAME: "eurekaserver"
+
+  gateway_server:
+    image: "gatewayserver"
+    container_name: "gatewayserver-ms"
+    ports:
+      - "9104:9104"
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - eroom
+    environment:
+      SPRING_APPLICATION_NAME: "gatewayserver"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver-ms:8761/eureka/
+
+  mdm_service:
+    image: "mdm-service"
+    container_name: "mdm-service-ms"
+    ports:
+      - "9101:9101"
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - eroom
+    environment:
+      SPRING_APPLICATION_NAME: "mdm_service"
+      SPRING_PROFILES_ACTIVE: dev
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver-ms:8761/eureka/
+
+  user_auth:
+    image: "user-auth"
+    container_name: "user-auth-ms"
+    ports:
+      - "9102:9102"
+    depends_on:
+      eurekaserver:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - eroom
+    environment:
+      SPRING_APPLICATION_NAME: "user_auth"
+      SPRING_PROFILES_ACTIVE: dev
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver-ms:8761/eureka/
+
+networks:
+  eroom:
+    driver: "bridge"
