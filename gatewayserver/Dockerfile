@@ -3,11 +3,9 @@ FROM openjdk:17-jdk-slim
 # Update package list and install curl in one step
 RUN apt-get update && apt-get install -y curl
 
-LABEL org.opencontainers.image.authors="eroom"
+ARG JAR_FILE=target/*.jar
 
-COPY target/gatewayserver.jar gatewayserver.jar
+COPY ${JAR_FILE} gatewayserver.jar
 
-## Verify curl installation
-#RUN curl --version
-
-ENTRYPOINT ["java", "-jar", "gatewayserver.jar"]
+ENTRYPOINT ["java", "-jar", "/gatewayserver.jar"]
+#ENTRYPOINT ["java","-Dspring.profiles.active=docker","-jar","/gatewayserver.jar"]

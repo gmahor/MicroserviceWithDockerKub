@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/eroom
+    url: jdbc:postgresql://localhost:5432/eroom
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
@@ -18,6 +18,3 @@ spring:
 
 # JWT Details
 jwtSecret: bpat528@1342#eroom@Bpaas@2024&@025
-
-## Backend server details
-#backendServerDetail: http://localhost:9100

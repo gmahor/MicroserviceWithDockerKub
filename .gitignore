@@ -1,0 +1,19 @@
+logs/
+target/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+###########
+
+### STS ###
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.log
+##############
+
